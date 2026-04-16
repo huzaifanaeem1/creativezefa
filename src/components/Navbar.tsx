@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState } from "react";
 import { navLinks } from "@/data/site-data";
@@ -10,9 +11,21 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-(--line) bg-[var(--surface)/0.85] backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#home" className="font-display text-lg font-semibold tracking-wide text-(--heading)">
-          StitchCraft Digitizing
-        </a>
+
+<a
+  href="#home"
+  className="flex items-center gap-2 font-display text-lg font-semibold tracking-wide text-(--heading)"
+>
+  <Image
+    src="/images/creativezefa.png"
+    alt="Creativezefa logo"
+    width={50}
+    height={30}
+    priority
+    className="object-contain"
+  />
+  <span className="leading-none">Creativezefa</span>
+</a>
 
         <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (

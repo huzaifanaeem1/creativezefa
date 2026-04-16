@@ -56,44 +56,71 @@ export const skills = [
   "Fabric-specific underlay strategy",
 ];
 
-export const services: Service[] = [
+export const services = [
   {
-    title: "Logo Digitizing",
+    title: "Logo Vector Tracing",
     description:
-      "Crisp, production-ready logo files tuned for clean stitches and balanced density.",
-    price: "Starting at $12",
+      "Convert blurry or low-quality logos into clean, scalable vector files with sharp lines and perfect curves.",
+    price: "$5+",
     icon: "logo",
   },
   {
-    title: "Cap Digitizing",
+    title: "Image to Vector Conversion",
     description:
-      "Center-out sequencing and cap frame-safe paths to avoid distortion on curved panels.",
-    price: "Starting at $18",
-    icon: "cap",
+      "Turn any raster image into high-quality vector artwork ready for print, branding, and production.",
+    price: "$5+",
+    icon: "image",
   },
   {
-    title: "3D Puff Digitizing",
+    title: "Custom Vector Illustration",
     description:
-      "Foam-ready satin architecture with edge control for bold, raised embroidery results.",
-    price: "Starting at $22",
-    icon: "puff",
+      "Detailed and complex artwork tracing with smooth curves, layers, and professional finishing.",
+    price: "$10+",
+    icon: "illustration",
   },
   {
-    title: "Jacket Back Digitizing",
+    title: "Logo Design",
     description:
-      "Large-format compositions with smooth fill logic for premium jackets and uniforms.",
-    price: "Starting at $40",
-    icon: "jacket",
+      "Modern and professional logo design tailored to your brand identity and business vision.",
+    price: "$10+",
+    icon: "design",
   },
   {
-    title: "Custom Embroidery Designs",
+    title: "Social Media Post Design",
     description:
-      "From sketches to stitched reality with technical digitizing tailored to your fabric and machine.",
-    price: "Starting at $25",
-    icon: "custom",
+      "Creative posts for Instagram, Facebook, and ads designed to boost engagement and visibility.",
+    price: "$8+",
+    icon: "social",
+  },
+  {
+    title: "YouTube Thumbnail Design",
+    description:
+      "High-converting thumbnails that grab attention and increase your click-through rate.",
+    price: "$5+",
+    icon: "thumbnail",
+  },
+  {
+    title: "Etsy Virtual Assistant",
+    description:
+      "Complete Etsy store support including product listings, SEO optimization, and management.",
+    price: "$15+",
+    icon: "etsy",
+  },
+  {
+    title: "Etsy Listing Images Design",
+    description:
+      "Professional product images and mockups designed to increase conversions on Etsy.",
+    price: "$10+",
+    icon: "listing",
+  },
+  {
+    title: "Video Editing",
+    description:
+      "Smooth and modern video editing for reels, TikTok, YouTube, and promotional content.",
+    price: "$10+",
+    icon: "video",
   },
 ];
-
 export const portfolioItems: PortfolioItem[] = [
   {
     id: 1,
@@ -203,24 +230,34 @@ export const testimonials: Testimonial[] = [
 
 export const faqs = [
   {
-    question: "What is your usual turnaround time?",
+    question: "How long does it take to convert an image to vector?",
     answer:
-      "Most standard designs are delivered within 4 to 12 hours. Complex jacket backs may take up to 24 hours.",
+      "Most designs are completed within 4 to 12 hours. Complex or detailed artwork may take up to 24 hours depending on the complexity.",
   },
   {
-    question: "Which file formats do you provide?",
+    question: "Which file formats will I receive?",
     answer:
-      "I deliver DST, PES, JEF, EMB, EXP, and more based on your machine requirements.",
+      "You will receive high-quality vector files including AI, SVG, EPS, PDF, and PNG — ready for print, branding, and digital use.",
   },
   {
-    question: "How does pricing work?",
+    question: "Can you work with low-quality or blurry images?",
     answer:
-      "Pricing depends on stitch count, complexity, and placement. You always receive a clear quote before work starts.",
+      "Yes, I specialize in converting low-quality, pixelated, or blurry images into clean, sharp vector artwork.",
   },
   {
     question: "Do you offer revisions?",
     answer:
-      "Yes. Minor revisions are included to ensure your design stitches exactly as expected.",
+      "Yes, I provide revisions to make sure you are fully satisfied with the final design.",
+  },
+  {
+    question: "Do you also design logos and social media posts?",
+    answer:
+      "Yes, I offer logo design, social media posts, thumbnails, and other creative design services.",
+  },
+  {
+    question: "Can you help with Etsy store management?",
+    answer:
+      "Yes, I provide Etsy VA services including product listings, SEO optimization, and store management.",
   },
 ];
 

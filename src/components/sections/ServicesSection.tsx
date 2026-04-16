@@ -4,25 +4,60 @@ import { services } from "@/data/site-data";
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="section-muted border-y border-(--line)">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 md:px-6 md:py-20">
+    <section
+      id="services"
+      className="section-muted border-y border-(--line)"
+    >
+      <div className="mx-auto w-full max-w-6xl px-4 py-14 md:px-6 md:py-16">
+
+        {/* HEADING */}
         <SectionHeading
           eyebrow="Services"
-          title="Specialized digitizing solutions for every embroidery placement"
-          description="Built for clean stitch quality, reduced machine downtime, and consistent brand presentation."
-          align="center"
+          title="Vector Tracing Services Designed for Real Use"
+          description="From blurry logos to complex artwork, I deliver clean, scalable vector files ready for print, branding, and production."
+          align="left"
         />
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* CARDS */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
           {services.map((service) => (
-            <article key={service.title} className="card-surface group p-6">
-              <ServiceIcon icon={service.icon} />
-              <h3 className="mt-4 font-display text-xl font-semibold text-(--heading)">{service.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-(--muted)">{service.description}</p>
-              <p className="mt-4 text-sm font-semibold text-(--accent)">{service.price}</p>
+            <article
+              key={service.title}
+              className="card-surface group flex flex-col justify-between w-full p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              
+              {/* TOP */}
+              <div>
+                <div className="flex items-center justify-between">
+                  <ServiceIcon icon={service.icon} />
+                  <span className="text-xs font-semibold text-(--accent)">
+                    {service.price}
+                  </span>
+                </div>
+
+                <h3 className="mt-4 font-display text-lg font-semibold text-(--heading) group-hover:text-(--accent) transition">
+                  {service.title}
+                </h3>
+
+                <p className="mt-2 text-sm leading-5 text-(--muted)">
+                  {service.description}
+                </p>
+              </div>
+
+              {/* BOTTOM */}
+              <div className="mt-4 flex items-center justify-between text-xs text-(--muted)">
+                <span>✔ Print Ready</span>
+                <span className="group-hover:text-(--accent) transition">
+                  View →
+                </span>
+              </div>
+
             </article>
           ))}
+
         </div>
+
       </div>
     </section>
   );

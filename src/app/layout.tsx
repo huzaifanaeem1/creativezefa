@@ -53,6 +53,7 @@ export default function RootLayout({
       className={`${manrope.variable} ${sora.variable} h-full antialiased`}
     >
       <head>
+        
         <script
           dangerouslySetInnerHTML={{
             __html:
