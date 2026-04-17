@@ -57,7 +57,7 @@ export default function HeroSection() {
           {/* RIGHT */}
           <div className="relative flex justify-center md:justify-end">
 
-            <div className="card-surface w-full max-w-xs p-3">
+            <div className="card-surface w-full max-w-xs p-3 animate-float3d">
 
               <div className="grid grid-cols-2 gap-2">
 

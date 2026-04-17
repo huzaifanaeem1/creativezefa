@@ -24,7 +24,7 @@ export default function ServicesSection() {
           {services.map((service) => (
             <article
               key={service.title}
-              className="card-surface group flex flex-col justify-between w-full p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="card-surface group flex flex-col justify-between w-full p-5"
             >
               
               {/* TOP */}

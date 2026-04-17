@@ -21,7 +21,7 @@
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text);
-  --font-sans: var(--font-manrope);
+  --font-sans: var(--font-inter);
 }
 
 body {
@@ -30,8 +30,9 @@ body {
     radial-gradient(circle at 15% 10%, #c7f3da 0%, transparent 40%),
     radial-gradient(circle at 85% 5%, #dff7ea 0%, transparent 35%),
     var(--bg);
+  background-attachment: fixed;
   color: var(--text);
-  font-family: var(--font-manrope), "Segoe UI", sans-serif;
+  font-family: var(--font-inter), "Segoe UI", sans-serif;
 }
 
 /* 🌙 DARK MODE */
@@ -54,7 +55,7 @@ body {
 }
 
 .font-display {
-  font-family: var(--font-sora), "Segoe UI", sans-serif;
+  font-family: var(--font-outfit), "Segoe UI", sans-serif;
 }
 
 /* 🌟 HERO GLOW */
@@ -79,15 +80,19 @@ body {
   border-radius: 1.1rem;
   background: color-mix(in srgb, var(--surface) 92%, transparent);
   box-shadow: 0 12px 40px -28px color-mix(in srgb, #000 40%, var(--accent) 20%);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-surface:hover {
+  transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) translateZ(15px);
+  box-shadow: 16px 20px 45px -20px color-mix(in srgb, #000 50%, var(--accent) 30%);
 }
 
 /* 🧊 MUTED SECTION */
 .section-muted {
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--surface-2) 70%, transparent),
-    transparent
-  );
+  background: transparent;
 }
 
 /* 🔗 FOOTER LINKS */
@@ -116,6 +121,23 @@ body {
   }
 }
 
+@keyframes float3d {
+  0% {
+    transform: translateY(0px) rotateX(2deg) rotateY(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(4deg) rotateY(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotateX(2deg) rotateY(-2deg);
+  }
+}
+
+.animate-float3d {
+  animation: float3d 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
 main section {
   animation: fadeUp 0.45s ease both;
 }
@@ -127,5 +149,6 @@ main section {
       radial-gradient(circle at 5% 2%, #c7f3da 0%, transparent 30%),
       radial-gradient(circle at 95% 0%, #dff7ea 0%, transparent 24%),
       var(--bg);
+    background-attachment: fixed;
   }
 }

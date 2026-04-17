@@ -5,7 +5,7 @@ import { FaWhatsapp, FaInstagram, FaFacebook, FaStore } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-(--line) bg-(--surface)">
+    <footer className="border-t border-(--line) bg-transparent">
       
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-(--muted) md:flex-row md:items-center md:justify-between md:px-6">
         
