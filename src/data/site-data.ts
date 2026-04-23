@@ -121,64 +121,30 @@ export const services = [
     icon: "video",
   },
 ];
-export const portfolioItems: PortfolioItem[] = [
-  {
-    id: 1,
-    title: "Streetwear Crest Logo",
-    category: "logos",
-    image: "/gallery/logo-1.svg",
-    alt: "Detailed crest logo digitized for apparel",
-  },
-  {
-    id: 2,
-    title: "Sports Team Cap Front",
-    category: "caps",
-    image: "/gallery/cap-1.svg",
-    alt: "Cap embroidery with clean stitch direction",
-  },
-  {
-    id: 3,
-    title: "Premium 3D Monogram",
-    category: "3d-puff",
-    image: "/gallery/puff-1.svg",
-    alt: "Raised 3D puff embroidery sample",
-  },
-  {
-    id: 4,
-    title: "Motor Club Jacket Back",
-    category: "jackets",
-    image: "/gallery/jacket-1.svg",
-    alt: "Large jacket back embroidery artwork",
-  },
-  {
-    id: 5,
-    title: "Coffee Brand Patch",
-    category: "custom",
-    image: "/gallery/custom-1.svg",
-    alt: "Custom patch embroidery digitizing",
-  },
-  {
-    id: 6,
-    title: "Minimal Brand Mark",
-    category: "logos",
-    image: "/gallery/logo-2.svg",
-    alt: "Minimal logo digitized for polos",
-  },
-  {
-    id: 7,
-    title: "Flat Brim Cap Series",
-    category: "caps",
-    image: "/gallery/cap-2.svg",
-    alt: "Series of cap embroidery outputs",
-  },
-  {
-    id: 8,
-    title: "3D Shield Emblem",
-    category: "3d-puff",
-    image: "/gallery/puff-2.svg",
-    alt: "Foam-ready shield emblem",
-  },
-];
+// export const portfolioItems: PortfolioItem[] = [
+//   {
+//     id: 1,
+//     title: "Logo Design",
+//     category: "logos",
+//     image: "/gallery/logo-1.svg",
+//     alt: "Detailed crest logo digitized for apparel",
+//   },
+//   {
+//     id: 2,
+//     title: "Raster to Vector",
+//     category: "vectors",
+//     image: "/gallery/cap-1.svg",
+//     alt: "Cap embroidery with clean stitch direction",
+//   },
+//   { 
+//     id: 3,
+//     title: "SVG Bundles Design",
+//     category: "bundles",
+//     image: "/gallery/puff-1.svg",
+//     alt: "Raised 3D puff embroidery sample",
+//   },
+
+// ];
 
 export const pricing: PricingPlan[] = [
   {

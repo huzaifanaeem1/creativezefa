@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { FaWhatsapp, FaInstagram, FaFacebook, FaStore } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaFacebook, FaStore, FaTwitter } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -44,7 +45,7 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://www.instagram.com"
+            href="https://www.instagram.com/creativezefa/"
             target="_blank"
             rel="noreferrer"
             className="hover:text-pink-500 transition"
@@ -53,16 +54,24 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://www.facebook.com"
+            href="https://www.facebook.com/profile.php?id=61572230995660"
             target="_blank"
             rel="noreferrer"
             className="hover:text-blue-500 transition"
           >
             <FaFacebook />
           </a>
+          <a
+            href="https://x.com/CreativeZefa"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-blue-500 transition"
+          >
+            <FaTwitter/>
+          </a>
 
           <a
-            href="https://www.etsy.com"
+            href="https://zefasvgs.etsy.com"
             target="_blank"
             rel="noreferrer"
             className="hover:text-orange-500 transition"

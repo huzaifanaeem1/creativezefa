@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import emailjs from "@emailjs/browser";
 import SectionHeading from "@/components/ui/SectionHeading";
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -33,43 +34,56 @@ export default function ContactSection() {
     }
 
     try {
-      const response = await fetch("/api/quote", {
-        method: "POST",
-        body: formData,
-      });
-
-      const payload: { message?: string } = await response.json();
-
-      if (!response.ok) {
-        throw new Error(payload.message ?? "Something went wrong.");
-      }
+      // ✅ EmailJS send
+      await emailjs.sendForm(
+        "YOUR_SERVICE_ID",   // 🔥 replace
+        "YOUR_TEMPLATE_ID",  // 🔥 replace
+        form,
+        "YOUR_PUBLIC_KEY"    // 🔥 replace
+      );
 
       setStatus("success");
-      setMessage(payload.message ?? "Quote request sent successfully.");
+      setMessage("✅ Quote request sent successfully!");
       form.reset();
+
     } catch (error) {
       setStatus("error");
-      setMessage(error instanceof Error ? error.message : "Unable to submit now. Please try again.");
+      setMessage("❌ Failed to send. Try again.");
     }
   }
 
   return (
     <section id="contact" className="section-muted border-y border-(--line)">
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
-        <div>
-          <SectionHeading
-            eyebrow="Contact"
-            title="Get your quote in minutes"
-            description="Share your artwork and project details. You will receive a clear estimate and turnaround plan quickly."
-          />
-          <div className="card-surface p-5 text-sm text-(--muted)">
-            <p>Email: hello@stitchcraftdigitizing.com</p>
-            <p className="mt-2">WhatsApp: +1 (555) 000-0000</p>
-            <p className="mt-2">Working hours: Mon - Sat, 8:00 AM to 11:00 PM (UTC)</p>
-          </div>
-        </div>
+        
+   <div>
+  <SectionHeading
+    eyebrow="Contact"
+    title="Get your quote in minutes"
+    description="Share your artwork and project details. You will receive a clear estimate and turnaround plan quickly."
+  />
+
+  <div className="card-surface p-5 text-sm text-(--muted)">
+   <p>
+  Email:{" "}
+  <a
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=creativezefa2@gmail.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-500 hover:underline"
+  >
+    creativezefa2@gmail.com
+  </a>
+</p>
+
+    <p className="mt-2">
+      Working hours: Mon - Sat, 8:00 AM to 11:00 PM (UTC)
+    </p>
+  </div>
+</div>
 
         <form onSubmit={handleSubmit} className="card-surface space-y-4 p-6" noValidate>
+          
           <div>
             <label htmlFor="name" className="mb-1 block text-sm font-medium text-(--heading)">
               Name
@@ -78,7 +92,7 @@ export default function ContactSection() {
               id="name"
               name="name"
               required
-              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm text-(--heading) outline-none focus:border-(--accent)"
+              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm outline-none focus:border-(--accent)"
               placeholder="Your full name"
             />
           </div>
@@ -92,7 +106,7 @@ export default function ContactSection() {
               name="email"
               type="email"
               required
-              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm text-(--heading) outline-none focus:border-(--accent)"
+              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm outline-none focus:border-(--accent)"
               placeholder="you@company.com"
             />
           </div>
@@ -106,8 +120,7 @@ export default function ContactSection() {
               name="design"
               type="file"
               required
-              accept=".png,.jpg,.jpeg,.pdf,.ai,.eps,.svg"
-              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm text-(--muted)"
+              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm"
             />
           </div>
 
@@ -120,7 +133,7 @@ export default function ContactSection() {
               name="description"
               rows={5}
               required
-              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm text-(--heading) outline-none focus:border-(--accent)"
+              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm outline-none focus:border-(--accent)"
               placeholder="Tell me about size, garment type, and target format"
             />
           </div>
@@ -130,14 +143,14 @@ export default function ContactSection() {
             disabled={status === "loading"}
             className="inline-flex w-full items-center justify-center rounded-xl bg-(--accent) px-4 py-3 text-sm font-semibold text-white transition hover:bg-(--accent-strong) disabled:opacity-70"
           >
-            {status === "loading" ? "Submitting..." : "Submit Quote Request"}
+            {status === "loading" ? "Sending..." : "Submit Quote Request"}
           </button>
 
-          {message ? (
-            <p className={`text-sm ${status === "success" ? "text-emerald-600" : "text-rose-600"}`} aria-live="polite">
+          {message && (
+            <p className={`text-sm ${status === "success" ? "text-emerald-600" : "text-rose-600"}`}>
               {message}
             </p>
-          ) : null}
+          )}
         </form>
       </div>
     </section>

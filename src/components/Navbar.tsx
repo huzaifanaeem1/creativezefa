@@ -39,24 +39,28 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <a
-            href="#contact"
-            className="hidden rounded-full bg-(--accent) px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--accent-strong) md:inline-flex"
-          >
-            Get a Quote
-          </a>
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--line) text-(--heading) md:hidden"
-            aria-label="Open navigation"
-            onClick={() => setOpen((prev) => !prev)}
-          >
-            <span className="text-xl leading-none">{open ? "×" : "≡"}</span>
-          </button>
-        </div>
-      </div>
+       <div className="flex items-center gap-2">
+  <ThemeToggle />
+
+  <a
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=creativezefa2@gmail.com&subject=Quote Request"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hidden rounded-full bg-(--accent) px-4 py-2 text-sm font-semibold text-white transition hover:bg-(--accent-strong) md:inline-flex"
+  >
+    Get a Quote
+  </a>
+
+  <button
+    type="button"
+    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-(--line) text-(--heading) md:hidden"
+    aria-label="Open navigation"
+    onClick={() => setOpen((prev) => !prev)}
+  >
+    <span className="text-xl leading-none">{open ? "×" : "≡"}</span>
+  </button>
+</div>
+</div>
 
       {open ? (
         <div className="border-t border-(--line) bg-(--surface) px-4 py-4 md:hidden">

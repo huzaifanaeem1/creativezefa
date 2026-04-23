@@ -10,6 +10,7 @@ import PortfolioSection from "@/components/sections/PortfolioSection";
 import PricingSection from "@/components/sections/PricingSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import EtsyShop from "@/components/sections/EtsyShop";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <PortfolioSection />
         <PricingSection />
         <TestimonialsSection />
+        <EtsyShop/>
         <FaqSection />
         <ContactSection />
       </main>
