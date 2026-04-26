@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
   FiEye,
@@ -155,7 +156,6 @@ export default function PortfolioSection() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [currentImage, setCurrentImage] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   /* 🔥 FILTER ITEMS BASED ON CATEGORY */
   const filteredItems = activeCategory === "all" 
@@ -163,11 +163,6 @@ export default function PortfolioSection() {
     : portfolioItems.filter((item) => item.category === activeCategory);
 
   const project = selectedProject !== null ? filteredItems[selectedProject] : null;
-
-  // Simulate loading
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -182,45 +177,45 @@ export default function PortfolioSection() {
   }, [isModalOpen]);
 
   /* 🔥 IMAGE NAVIGATION */
-  const handleNextImage = (e?: React.MouseEvent) => {
+  const handleNextImage = useCallback((e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (!project) return;
     setCurrentImage((prev) => (prev + 1) % project.image.length);
-  };
+  }, [project]);
 
-  const handlePrevImage = (e?: React.MouseEvent) => {
+  const handlePrevImage = useCallback((e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (!project) return;
     setCurrentImage((prev) => (prev - 1 + project.image.length) % project.image.length);
-  };
+  }, [project]);
 
-  /* 🔥 PROJECT NAVIGATION */
-  const handleNextProject = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (selectedProject === null) return;
-    setSelectedProject((prev) => (prev! + 1) % filteredItems.length);
-    setCurrentImage(0);
-  };
-
-  const handlePrevProject = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    if (selectedProject === null) return;
-    setSelectedProject((prev) => (prev! - 1 + filteredItems.length) % filteredItems.length);
-    setCurrentImage(0);
-  };
-
-  const openModal = (index: number) => {
-    setSelectedProject(index);
-    setCurrentImage(0);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setTimeout(() => {
       setSelectedProject(null);
       setCurrentImage(0);
     }, 200);
+  }, []);
+
+  /* 🔥 PROJECT NAVIGATION */
+  const handleNextProject = useCallback((e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (selectedProject === null) return;
+    setSelectedProject((prev) => (prev! + 1) % filteredItems.length);
+    setCurrentImage(0);
+  }, [filteredItems.length, selectedProject]);
+
+  const handlePrevProject = useCallback((e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (selectedProject === null) return;
+    setSelectedProject((prev) => (prev! - 1 + filteredItems.length) % filteredItems.length);
+    setCurrentImage(0);
+  }, [filteredItems.length, selectedProject]);
+
+  const openModal = (index: number) => {
+    setSelectedProject(index);
+    setCurrentImage(0);
+    setIsModalOpen(true);
   };
 
   /* ⌨️ KEYBOARD SUPPORT */
@@ -245,22 +240,10 @@ export default function PortfolioSection() {
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [isModalOpen, project]);
-
-  if (isLoading) {
-    return (
-      <section className="mx-auto max-w-7xl px-4 py-20">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[1,2,3].map((i) => (
-            <div key={i} className="h-52 rounded-2xl bg-(--surface-2) animate-pulse" />
-          ))}
-        </div>
-      </section>
-    );
-  }
+  }, [closeModal, handleNextImage, handlePrevImage, isModalOpen]);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+    <section id="portfolio" className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 md:py-20">
       <SectionHeading
         eyebrow="Portfolio"
         title="Logo & Vector Bundles"
@@ -281,8 +264,8 @@ export default function PortfolioSection() {
               }}
               className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-2 ${
                 activeCategory === cat.key
-                  ? "bg-[var(--accent)] text-white shadow-md"
-                  : "border border-[var(--line)] text-[var(--muted)] hover:bg-[var(--surface-2)]"
+                  ? "bg-(--accent) text-white shadow-md"
+                  : "border border-(--line) text-(--muted) hover:bg-(--surface-2)"
               }`}
             >
               <Icon className="text-xs sm:text-sm" />
@@ -298,14 +281,16 @@ export default function PortfolioSection() {
           <div
             key={item.id}
             onClick={() => openModal(index)}
-            className="group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden bg-[var(--surface-1)] border border-[var(--line)] transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl"
+            className="group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden bg-(--surface-1) border border-(--line) transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-xl"
           >
-            <div className="relative overflow-hidden aspect-[4/3]">
-              <img
+            <div className="relative overflow-hidden aspect-4/3">
+              <Image
                 src={item.image[0]}
                 alt={item.title}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                loading="lazy"
+                quality={72}
               />
 
               {/* OVERLAY */}
@@ -344,10 +329,15 @@ export default function PortfolioSection() {
           >
             {/* IMAGE CONTAINER */}
             <div className="relative bg-black/40">
-              <img
+              <Image
                 src={project.image[currentImage]}
                 alt={project.title}
-                className="w-full max-h-[50vh] sm:max-h-[70vh] object-contain"
+                width={1600}
+                height={1200}
+                sizes="100vw"
+                quality={80}
+                className="h-auto w-full max-h-[50vh] sm:max-h-[70vh] object-contain"
+                priority
               />
               
               {/* IMAGE COUNTER */}
@@ -366,7 +356,7 @@ export default function PortfolioSection() {
                   <p className="text-xs sm:text-sm text-white/70 capitalize">{project.category}</p>
                 </div>
                 <p className="text-xs sm:text-sm text-white/70">
-                  {selectedProject + 1}/{filteredItems.length}
+                  {(selectedProject ?? 0) + 1}/{filteredItems.length}
                 </p>
               </div>
             </div>

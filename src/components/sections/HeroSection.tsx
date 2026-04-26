@@ -1,16 +1,8 @@
-"use client";
-
-import { useState, useEffect } from "react";
+import Image from "next/image";
 import { stats } from "@/data/site-data";
 import { FiArrowRight, FiCheckCircle, FiClock, FiFileText, FiPrinter } from "react-icons/fi";
 
 export default function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
   return (
     <section
       id="home"
@@ -26,9 +18,7 @@ export default function HeroSection() {
         <div className="grid items-center gap-8 md:gap-12 lg:gap-16 md:grid-cols-2">
 
           {/* LEFT CONTENT */}
-          <div className={`space-y-4 sm:space-y-5 text-center md:text-left transition-all duration-700 ${
-            isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
-          }`}>
+          <div className="space-y-4 sm:space-y-5 text-center md:text-left transition-all duration-700 translate-x-0 opacity-100">
             
             {/* Badge */}
             <div className="inline-flex mx-auto md:mx-0">
@@ -93,9 +83,7 @@ export default function HeroSection() {
           </div>
 
           {/* RIGHT CONTENT - Before/After Card */}
-          <div className={`relative flex justify-center transition-all duration-700 delay-200 ${
-            isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
-          }`}>
+          <div className="relative flex justify-center transition-all duration-700 delay-200 translate-x-0 opacity-100">
             
             {/* Floating Elements */}
             <div className="absolute -top-4 -left-4 w-20 h-20 bg-(--accent)/10 rounded-full blur-2xl animate-pulse" />
@@ -117,11 +105,13 @@ export default function HeroSection() {
                       <div className="w-1.5 h-1.5 rounded-full bg-red-500/50" />
                     </div>
                     <div className="relative overflow-hidden rounded-xl bg-(--surface-2) aspect-square">
-                      <img
+                      <Image
                         src="/gallery/before.jpeg"
                         alt="Before conversion"
+                        fill
+                        sizes="(max-width: 768px) 40vw, 220px"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        loading="lazy"
+                        quality={70}
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-black/30 to-transparent" />
                     </div>
@@ -134,11 +124,13 @@ export default function HeroSection() {
                       <div className="w-1.5 h-1.5 rounded-full bg-(--accent) animate-pulse" />
                     </div>
                     <div className="relative overflow-hidden rounded-xl bg-(--surface-2) aspect-square ring-2 ring-(--accent)/30">
-                      <img
+                      <Image
                         src="/gallery/after.jpeg"
                         alt="After conversion"
+                        fill
+                        sizes="(max-width: 768px) 40vw, 220px"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        loading="lazy"
+                        quality={70}
                       />
                       <div className="absolute inset-0 bg-linear-to-t from-(--accent)/20 to-transparent" />
                     </div>
@@ -167,11 +159,9 @@ export default function HeroSection() {
         </div>
 
         {/* STATS SECTION - Enhanced */}
-        <div className={`mt-10 sm:mt-12 md:mt-16 transition-all duration-700 delay-300 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-        }`}>
+        <div className="mt-10 sm:mt-12 md:mt-16 transition-all duration-700 delay-300 translate-y-0 opacity-100">
           <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-            {stats.map((item, index) => (
+            {stats.map((item) => (
               <div
                 key={item.label}
                 className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-(--line) bg-(--surface-1)/50 backdrop-blur-sm p-3 sm:p-4 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl"
@@ -197,18 +187,6 @@ export default function HeroSection() {
         </div>
 
       </div>
-
-      {/* Custom Animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 }

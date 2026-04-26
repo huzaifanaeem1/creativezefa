@@ -46,7 +46,7 @@ export default function ContactSection() {
       setMessage("✅ Quote request sent successfully!");
       form.reset();
 
-    } catch (error) {
+    } catch {
       setStatus("error");
       setMessage("❌ Failed to send. Try again.");
     }

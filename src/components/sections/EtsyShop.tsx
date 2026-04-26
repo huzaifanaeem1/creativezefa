@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { 
   FiShoppingBag, 
-  FiArrowRight,
   FiMessageCircle,
   FiDownload,
   FiShield,
@@ -137,7 +136,7 @@ export default function EtsyShopSection() {
                 >
                   <FiShoppingBag className="text-lg" />
                   <span>Shop on Etsy</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-linear-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </a>
 
                 <a

@@ -71,7 +71,7 @@ export default function FaqSection() {
                 }`}
               >
                 {/* Gradient Hover Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-(--accent)/0 to-(--accent)/0 group-hover:from-(--accent)/5 group-hover:to-transparent transition-all duration-500" />
+                <div className="absolute inset-0 bg-linear-to-br from-(--accent)/0 to-(--accent)/0 group-hover:from-(--accent)/5 group-hover:to-transparent transition-all duration-500" />
 
                 {/* Question Button */}
                 <button
@@ -81,7 +81,7 @@ export default function FaqSection() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-3 flex-1">
                       {/* Icon */}
-                      <div className="flex-shrink-0 mt-0.5">
+                      <div className="shrink-0 mt-0.5">
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${
                           openIndex === index 
                             ? 'bg-(--accent) text-white' 
@@ -100,7 +100,7 @@ export default function FaqSection() {
                     </div>
                     
                     {/* Arrow Icon */}
-                    <div className={`flex-shrink-0 transition-all duration-300 ${
+                    <div className={`shrink-0 transition-all duration-300 ${
                       openIndex === index ? 'rotate-180 text-(--accent)' : 'text-(--muted) group-hover:text-(--accent)'
                     }`}>
                       <FiChevronDown className="text-xl" />
@@ -125,7 +125,7 @@ export default function FaqSection() {
                 </div>
 
                 {/* Decorative Bottom Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-(--accent)/0 via-(--accent)/50 to-(--accent)/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-(--accent)/0 via-(--accent)/50 to-(--accent)/0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
               </div>
             </div>
           ))}
@@ -148,7 +148,7 @@ export default function FaqSection() {
                   Still have questions?
                 </h3>
                 <p className="text-sm text-(--muted)">
-                  Can't find the answer you're looking for? Please reach out to me.
+                  Can&apos;t find the answer you&apos;re looking for? Please reach out to me.
                 </p>
               </div>
               
@@ -156,7 +156,7 @@ export default function FaqSection() {
               <button className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--accent) text-white text-sm font-semibold overflow-hidden transition-all hover:shadow-lg hover:scale-105">
                 <FiMail className="relative z-10 text-sm" />
                 <span className="relative z-10">Contact Me</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
+                <div className="absolute inset-0 bg-linear-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
               </button>
             </div>
           </div>

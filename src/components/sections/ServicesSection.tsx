@@ -10,7 +10,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function ServicesSection() {
   const sectionRef = useRef(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
   const headingsRef = useRef<(HTMLHeadingElement | null)[]>([]);
 
   useEffect(() => {

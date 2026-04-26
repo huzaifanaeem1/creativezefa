@@ -9,12 +9,13 @@ import {
   FiLayout,
   FiCamera,
 } from "react-icons/fi";
+import type { IconType } from "react-icons";
 
 type ServiceIconProps = {
   icon: string;
 };
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, IconType> = {
   logo: FiPenTool,
   image: FiImage,
   illustration: FiLayers,

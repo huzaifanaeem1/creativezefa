@@ -23,6 +23,7 @@ export default function Navbar() {
     height={30}
     priority
     className="object-contain"
+    style={{ height: "auto" }}
   />
   <span className="leading-none">Creativezefa</span>
 </a>

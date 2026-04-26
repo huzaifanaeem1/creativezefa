@@ -24,6 +24,14 @@
   --font-sans: var(--font-inter);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
 body {
   min-height: 100vh;
   background:
@@ -140,6 +148,16 @@ body {
 
 main section {
   animation: fadeUp 0.45s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  main section {
+    animation: none;
+  }
 }
 
 /* 📱 MOBILE BG FIX */

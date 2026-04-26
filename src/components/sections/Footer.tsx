@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import { FaWhatsapp, FaInstagram, FaFacebook, FaStore, FaTwitter } from "react-icons/fa";
-import { FaX } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -23,6 +20,7 @@ export default function Footer() {
               height={30}
               priority
               className="object-contain"
+              style={{ height: "auto" }}
             />
             <span className="leading-none">Creativezefa</span>
           </a>

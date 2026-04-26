@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { skills } from "@/data/site-data";
-import { FiCheckCircle, FiTool, FiAward, FiClock, FiUsers, FiHeart } from "react-icons/fi";
+import { FiCheckCircle, FiTool, FiAward, FiUsers, FiHeart } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -118,7 +118,7 @@ export default function AboutSection() {
     };
   }, []);
 
-  const handleCardHover = (card: HTMLDivElement | null, isLeft: boolean) => {
+  const handleCardHover = (card: HTMLDivElement | null) => {
     if (!card) return;
     gsap.to(card, {
       y: -10,
@@ -173,7 +173,7 @@ export default function AboutSection() {
         {/* LEFT CARD */}
         <article
           ref={leftCardRef}
-          onMouseEnter={() => handleCardHover(leftCardRef.current, true)}
+          onMouseEnter={() => handleCardHover(leftCardRef.current)}
           onMouseLeave={() => handleCardLeave(leftCardRef.current)}
           className="group relative overflow-hidden rounded-2xl border border-(--line) bg-(--surface-1) p-5 transition-all md:p-6"
         >
@@ -208,7 +208,7 @@ export default function AboutSection() {
                   ref={(el) => { listItemsRef.current[index] = el; }}
                   className="flex items-start gap-2"
                 >
-                  <FiCheckCircle className="mt-0.5 text-base text-(--accent) flex-shrink-0" />
+                  <FiCheckCircle className="mt-0.5 text-base text-(--accent) shrink-0" />
                   <span>{text}</span>
                 </li>
               ))}
@@ -231,7 +231,7 @@ export default function AboutSection() {
         {/* RIGHT CARD */}
         <article
           ref={rightCardRef}
-          onMouseEnter={() => handleCardHover(rightCardRef.current, false)}
+          onMouseEnter={() => handleCardHover(rightCardRef.current)}
           onMouseLeave={() => handleCardLeave(rightCardRef.current)}
           className="group relative overflow-hidden rounded-2xl border border-(--line) bg-(--surface-1) p-5 transition-all md:p-6"
         >
