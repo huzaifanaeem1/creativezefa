@@ -192,41 +192,105 @@ export const testimonials: Testimonial[] = [
       "Great communication and fair pricing. My 3D puff jobs look sharp and clean every time.",
     rating: 5,
   },
+  {
+    name: "Jennifer M.",
+    role: "Etsy Store Owner",
+    message:
+      "The vector files I received were perfect for my DTF printing. My customers love the quality and I've seen a huge increase in repeat orders since switching to this service.",
+    rating: 5,
+  },
+  {
+    name: "Marcus T.",
+    role: "Screen Printing Business",
+    message:
+      "Been using this service for 6 months now. Never had a single issue with file compatibility or quality. They always deliver on time and revisions are super fast.",
+    rating: 5,
+  },
+  {
+    name: "Priya S.",
+    role: "Graphic Designer",
+    message:
+      "As a designer, I need clean vectors for my clients. This team never disappoints. Complex artwork is traced beautifully and they understand all the technical requirements perfectly.",
+    rating: 5,
+  },
+  {
+    name: "James W.",
+    role: "Custom Merchandise Company",
+    message:
+      "From simple logos to complex jacket back designs, they handle everything with precision. The production team loves how clean their files are - no adjustments needed on our end.",
+    rating: 5,
+  },
+  {
+    name: "Lisa C.",
+    role: "Small Business Owner",
+    message:
+      "I had a blurry old logo that I thought was unusable. They transformed it into a crisp, professional vector that looks amazing on my packaging and website. Highly recommend!",
+    rating: 5,
+  },
 ];
 
 export const faqs = [
   {
     question: "How long does it take to convert an image to vector?",
     answer:
-      "Most designs are completed within 4 to 12 hours. Complex or detailed artwork may take up to 24 hours depending on the complexity.",
+      "Most designs are completed within 4 to 12 hours. Complex or detailed artwork may take up to 24 hours depending on the complexity. Rush orders are also available upon request.",
   },
   {
     question: "Which file formats will I receive?",
     answer:
-      "You will receive high-quality vector files including AI, SVG, EPS, PDF, and PNG — ready for print, branding, and digital use.",
+      "You will receive high-quality vector files including AI, SVG, EPS, PDF, PNG, DXF, and PSD — ready for screen printing, embroidery, DTF, vinyl cutting, branding, and digital use.",
   },
   {
     question: "Can you work with low-quality or blurry images?",
     answer:
-      "Yes, I specialize in converting low-quality, pixelated, or blurry images into clean, sharp vector artwork.",
+      "Yes, I specialize in converting low-quality, pixelated, or blurry images into clean, sharp vector artwork. Even hand-drawn sketches or old logos can be recreated professionally.",
   },
   {
     question: "Do you offer revisions?",
     answer:
-      "Yes, I provide revisions to make sure you are fully satisfied with the final design.",
+      "Yes, I provide revisions to make sure you are fully satisfied with the final design. Minor adjustments are included free of charge.",
+  },
+  {
+    question: "What is your turnaround time for embroidery files?",
+    answer:
+      "Embroidery digitizing files typically take 4 to 8 hours. For complex designs or large batches, delivery time may extend to 12-24 hours.",
+  },
+  {
+    question: "Do you provide DTF ready vector files?",
+    answer:
+      "Yes, I provide print-ready vector files specifically optimized for DTF printing. Files are prepared with correct color separation and proper sizing.",
+  },
+  {
+    question: "Can you recreate a logo from a photo of a t-shirt?",
+    answer:
+      "Absolutely! Even if the logo is wrinkled, faded, or at an angle, I can redraw it cleanly and professionally as a scalable vector.",
   },
   {
     question: "Do you also design logos and social media posts?",
     answer:
-      "Yes, I offer logo design, social media posts, thumbnails, and other creative design services.",
+      "Yes, I offer logo design, social media posts, YouTube thumbnails, and other creative design services tailored to your brand.",
+  },
+  {
+    question: "What is your pricing for vector tracing?",
+    answer:
+      "Pricing starts from $5 for simple logos and goes up based on complexity. I provide a free quote before starting any project — no hidden fees.",
   },
   {
     question: "Can you help with Etsy store management?",
     answer:
-      "Yes, I provide Etsy VA services including product listings, SEO optimization, and store management.",
+      "Yes, I provide Etsy VA services including product listings, SEO optimization, mockup designs, and complete store management.",
+  },
+  {
+    question: "Do you offer commercial use rights for vectors?",
+    answer:
+      "Yes, all vector files I create come with full commercial use rights. You can use them for your business, products, or client projects.",
+  },
+  {
+    question: "How do I send my image for vector conversion?",
+    answer:
+      "You can send your image via WhatsApp, email, or directly from my website. I accept JPG, PNG, PDF, and even physical photos.",
   },
 ];
-
 export const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },

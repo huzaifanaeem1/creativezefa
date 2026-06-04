@@ -1,9 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { skills } from "@/data/site-data";
-import { FiCheckCircle, FiTool, FiAward, FiUsers, FiHeart } from "react-icons/fi";
+import { 
+  FiCheckCircle, 
+  FiAward, 
+  FiHeart, 
+  FiClock, 
+  FiStar,
+  FiTrendingUp,
+  FiThumbsUp,
+  FiBriefcase,
+  FiZap,
+  FiUsers
+} from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,24 +22,34 @@ export default function AboutSection() {
   const leftCardRef = useRef(null);
   const rightCardRef = useRef(null);
   const listItemsRef = useRef<(HTMLLIElement | null)[]>([]);
-  const skillItemsRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animate left card
+    const leftCardX = isMobile ? -20 : -50;
+    const rightCardX = isMobile ? 20 : 50;
+    const staggerDelay = isMobile ? 0.05 : 0.1;
+
     if (leftCardRef.current) {
       gsap.fromTo(leftCardRef.current,
         {
           opacity: 0,
-          x: -50,
-          rotateY: -10,
+          x: leftCardX,
+          rotateY: isMobile ? -5 : -10,
         },
         {
           opacity: 1,
           x: 0,
           rotateY: 0,
-          duration: 0.8,
+          duration: isMobile ? 0.6 : 0.8,
           ease: "power3.out",
           scrollTrigger: {
             trigger: leftCardRef.current,
@@ -40,19 +60,18 @@ export default function AboutSection() {
       );
     }
 
-    // Animate right card
     if (rightCardRef.current) {
       gsap.fromTo(rightCardRef.current,
         {
           opacity: 0,
-          x: 50,
-          rotateY: 10,
+          x: rightCardX,
+          rotateY: isMobile ? 5 : 10,
         },
         {
           opacity: 1,
           x: 0,
           rotateY: 0,
-          duration: 0.8,
+          duration: isMobile ? 0.6 : 0.8,
           ease: "power3.out",
           scrollTrigger: {
             trigger: rightCardRef.current,
@@ -63,19 +82,18 @@ export default function AboutSection() {
       );
     }
 
-    // Animate list items with stagger
     listItemsRef.current.forEach((item, index) => {
       if (item) {
         gsap.fromTo(item,
           {
             opacity: 0,
-            x: -20,
+            x: -15,
           },
           {
             opacity: 1,
             x: 0,
-            duration: 0.5,
-            delay: index * 0.1 + 0.3,
+            duration: 0.4,
+            delay: index * staggerDelay + 0.2,
             ease: "back.out(0.5)",
             scrollTrigger: {
               trigger: leftCardRef.current,
@@ -87,39 +105,14 @@ export default function AboutSection() {
       }
     });
 
-    // Animate skill tags with 3D rotation
-    skillItemsRef.current.forEach((skill, index) => {
-      if (skill) {
-        gsap.fromTo(skill,
-          {
-            opacity: 0,
-            scale: 0,
-            rotationX: -90,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            rotationX: 0,
-            duration: 0.4,
-            delay: index * 0.05 + 0.2,
-            ease: "back.out(0.6)",
-            scrollTrigger: {
-              trigger: rightCardRef.current,
-              start: "top bottom-=80",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    });
-
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('resize', checkMobile);
     };
-  }, []);
+  }, [isMobile]);
 
   const handleCardHover = (card: HTMLDivElement | null) => {
-    if (!card) return;
+    if (!card || isMobile) return;
     gsap.to(card, {
       y: -10,
       boxShadow: "0 25px 40px -12px rgba(0,0,0,0.25)",
@@ -129,7 +122,7 @@ export default function AboutSection() {
   };
 
   const handleCardLeave = (card: HTMLDivElement | null) => {
-    if (!card) return;
+    if (!card || isMobile) return;
     gsap.to(card, {
       y: 0,
       boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
@@ -138,156 +131,214 @@ export default function AboutSection() {
     });
   };
 
-  const handleSkillHover = (skill: HTMLSpanElement | null) => {
-    if (!skill) return;
-    gsap.to(skill, {
-      scale: 1.1,
-      duration: 0.2,
-      ease: "back.out(1)",
-    });
-  };
+  // About CreativeZefa ke points - aapke diye hue content se
+  const aboutPoints = [
+    "Specialize in professional raster-to-vector conversion",
+    "Transform low-quality, blurry images into clean vector files",
+    "Maintain sharp quality at any size for all outputs",
+    "Perfect for screen printing, embroidery & DTF printing",
+    "Ideal for vinyl cutting, branding & promotional materials",
+    "Logo redraws and print-ready artwork preparation",
+    "Accurate and high-quality vector artwork tailored to your needs"
+  ];
 
-  const handleSkillLeave = (skill: HTMLSpanElement | null) => {
-    if (!skill) return;
-    gsap.to(skill, {
-      scale: 1,
-      duration: 0.2,
-      ease: "power2.out",
-    });
-  };
+  const stats = [
+    { icon: FiAward, value: "500+", label: "Projects Completed", color: "accent" },
+    { icon: FiHeart, value: "99%", label: "Client Satisfaction", color: "rose" },
+    { icon: FiTrendingUp, value: "24h", label: "Fast Turnaround", color: "green" },
+    { icon: FiThumbsUp, value: "100%", label: "Quality Guaranteed", color: "blue" }
+  ];
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="mx-auto w-full max-w-6xl px-4 py-14 md:px-6 md:py-16"
+      className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20"
     >
       <SectionHeading
-        eyebrow="About Me"
-        title="Turning rough images into clean, professional vector artwork"
-        description="I help businesses, brands, and creators convert low-quality images into sharp, scalable vector designs ready for print, branding, and production."
+        eyebrow="About CreativeZefa"
+        title="Professional Raster-to-Vector Conversion & Print-Ready Artwork"
+        description="We transform low-quality, blurry, or pixelated images into clean, scalable vector files that maintain sharp quality at any size. Whether you need a logo converted for screen printing, embroidery, DTF printing, vinyl cutting, branding, or promotional materials, we provide accurate and high-quality vector artwork tailored to your needs."
       />
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
         
-        {/* LEFT CARD */}
+        {/* LEFT CARD - About CreativeZefa */}
         <article
           ref={leftCardRef}
           onMouseEnter={() => handleCardHover(leftCardRef.current)}
           onMouseLeave={() => handleCardLeave(leftCardRef.current)}
-          className="group relative overflow-hidden rounded-2xl border border-(--line) bg-(--surface-1) p-5 transition-all md:p-6"
+          className="group relative overflow-hidden rounded-2xl border border-(--line) bg-gradient-to-br from-(--surface-1) to-(--surface-2) p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-2xl"
         >
-          {/* Background Pattern */}
-          <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 opacity-5">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <path d="M 100 100 L 200 0 L 200 100 Z" fill="currentColor" className="text-(--accent)" />
             </svg>
           </div>
 
-          <div className="relative">
-            {/* Header with Icon */}
-            <div className="mb-4 flex items-center gap-3">
-              <div className="rounded-lg bg-(--accent)/10 p-2 text-(--accent) group-hover:scale-110 transition-transform duration-300">
-                <FiUsers className="text-xl" />
+          <div className="relative z-10">
+            <div className="mb-5 sm:mb-6 flex items-center gap-3 sm:gap-4">
+              <div className="rounded-xl bg-(--accent)/10 p-2.5 sm:p-3 text-(--accent) group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                <FiUsers className="text-lg sm:text-xl lg:text-2xl" />
               </div>
-              <h3 className="font-display text-xl font-semibold text-(--heading)">
-                Why clients choose me
-              </h3>
+              <div>
+                <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-(--heading)">
+                  About CreativeZefa
+                </h3>
+                <p className="text-xs sm:text-sm text-(--muted) mt-1 hidden sm:block">
+                  Who we are & what we do
+                </p>
+              </div>
             </div>
 
-            {/* Features List */}
-            <ul className="space-y-3 text-sm text-(--muted)">
-              {[
-                "Clean, smooth vector tracing with attention to every detail.",
-                "Fast delivery and quick revisions based on your needs.",
-                "Print-ready files (AI, SVG, EPS, PDF, PNG).",
-                "Perfect for logos, laser cutting, vinyl, and branding."
-              ].map((text, index) => (
+            <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base">
+              {aboutPoints.map((point, index) => (
                 <li
                   key={index}
                   ref={(el) => { listItemsRef.current[index] = el; }}
-                  className="flex items-start gap-2"
+                  className="flex items-start gap-2.5 sm:gap-3 group/item hover:translate-x-1 transition-transform duration-200"
                 >
-                  <FiCheckCircle className="mt-0.5 text-base text-(--accent) shrink-0" />
-                  <span>{text}</span>
+                  <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0 flex-shrink-0" />
+                  <div className="flex-1">
+                    <span className="text-(--muted) leading-relaxed">{point}</span>
+                  </div>
                 </li>
               ))}
             </ul>
 
-            {/* Stats/Highlight */}
-            <div className="mt-6 flex items-center gap-4 pt-4 border-t border-(--line)">
-              <div className="flex items-center gap-2">
-                <FiAward className="text-(--accent)" />
-                <span className="text-xs text-(--muted)">500+ Projects</span>
+            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-(--line)">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-center sm:text-left group/stat">
+                    <stat.icon className={`text-(--${stat.color}) text-lg sm:text-xl mx-auto sm:mx-0 mb-1 sm:mb-2 group-hover/stat:scale-110 transition-transform`} />
+                    <div className="font-display font-bold text-base sm:text-lg lg:text-xl text-(--heading)">
+                      {stat.value}
+                    </div>
+                    <div className="text-[10px] sm:text-xs text-(--muted) mt-0.5">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center gap-2">
-                <FiHeart className="text-(--accent)" />
-                <span className="text-xs text-(--muted)">98% Satisfaction</span>
+            </div>
+
+            <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-(--line) flex items-center justify-between sm:justify-start sm:gap-6">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="flex -space-x-1.5 sm:-space-x-2">
+                  {[...Array(3)].map((_, i) => (
+                    <div 
+                      key={i} 
+                      className="h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-(--accent)/20 border-2 border-(--surface-1) flex items-center justify-center text-[10px] sm:text-xs text-(--accent) font-bold"
+                    >
+                      ✓
+                    </div>
+                  ))}
+                </div>
+                <span className="text-xs sm:text-sm font-medium text-(--muted)">
+                  Trusted by <span className="text-(--accent) font-semibold">500+</span> clients
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-(--accent)">
+                <FiStar className="fill-(--accent) text-xs sm:text-sm" />
+                <FiStar className="fill-(--accent) text-xs sm:text-sm" />
+                <FiStar className="fill-(--accent) text-xs sm:text-sm" />
+                <FiStar className="fill-(--accent) text-xs sm:text-sm" />
+                <FiStar className="fill-(--accent) text-xs sm:text-sm" />
               </div>
             </div>
           </div>
         </article>
 
-        {/* RIGHT CARD */}
+        {/* RIGHT CARD - Why Choose CreativeZefa / Value Proposition */}
         <article
           ref={rightCardRef}
           onMouseEnter={() => handleCardHover(rightCardRef.current)}
           onMouseLeave={() => handleCardLeave(rightCardRef.current)}
-          className="group relative overflow-hidden rounded-2xl border border-(--line) bg-(--surface-1) p-5 transition-all md:p-6"
+          className="group relative overflow-hidden rounded-2xl border border-(--line) bg-gradient-to-br from-(--surface-1) to-(--surface-2) p-5 sm:p-6 lg:p-8 transition-all duration-300 hover:shadow-2xl"
         >
-          {/* Background Pattern */}
-          <div className="pointer-events-none absolute -left-20 -bottom-20 h-40 w-40 opacity-5">
+          <div className="pointer-events-none absolute -left-20 -bottom-20 h-40 w-40 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <circle cx="100" cy="100" r="80" fill="currentColor" className="text-(--accent)" />
             </svg>
           </div>
 
-          <div className="relative">
-            {/* Header with Icon */}
-            <div className="mb-4 flex items-center gap-3">
-              <div className="rounded-lg bg-(--accent)/10 p-2 text-(--accent) group-hover:scale-110 transition-transform duration-300">
-                <FiTool className="text-xl" />
+          <div className="relative z-10">
+            <div className="mb-5 sm:mb-6 flex items-center gap-3 sm:gap-4">
+              <div className="rounded-xl bg-(--accent)/10 p-2.5 sm:p-3 text-(--accent) group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300">
+                <FiBriefcase className="text-lg sm:text-xl lg:text-2xl" />
               </div>
-              <h3 className="font-display text-xl font-semibold text-(--heading)">
-                Tools & Skills
-              </h3>
+              <div>
+                <h3 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-(--heading)">
+                  Why Choose CreativeZefa?
+                </h3>
+                <p className="text-xs sm:text-sm text-(--muted) mt-1 hidden sm:block">
+                  Our commitment to quality
+                </p>
+              </div>
             </div>
 
-            {/* Skills Grid with 3D effect */}
-            <div className="flex flex-wrap gap-2">
-              {skills.map((skill, index) => (
-                <span
-                  key={skill}
-                  ref={(el) => { skillItemsRef.current[index] = el; }}
-                  onMouseEnter={() => handleSkillHover(skillItemsRef.current[index])}
-                  onMouseLeave={() => handleSkillLeave(skillItemsRef.current[index])}
-                  className="inline-flex cursor-default rounded-full border border-(--line) bg-(--surface-2) px-3 py-1 text-[11px] font-medium text-(--muted) transition-all hover:border-(--accent)/50 hover:bg-(--accent)/10 hover:text-(--accent)"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-sm sm:text-base text-(--heading)">High-Quality Vector Artwork</h4>
+                  <p className="text-xs sm:text-sm text-(--muted)">Clean lines & smooth curves every time</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-sm sm:text-base text-(--heading)">100% Scalable Graphics</h4>
+                  <p className="text-xs sm:text-sm text-(--muted)">Perfect quality at any size for any use</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-sm sm:text-base text-(--heading)">Print-Ready Files</h4>
+                  <p className="text-xs sm:text-sm text-(--muted)">AI, SVG, EPS, PDF, PNG & more formats</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5 sm:gap-3">
+                <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-sm sm:text-base text-(--heading)">Professional Communication</h4>
+                  <p className="text-xs sm:text-sm text-(--muted)">Fast turnaround with dedicated support</p>
+                </div>
+              </div>
             </div>
 
-            {/* Description with animation */}
-            <p className="mt-4 text-sm text-(--muted) leading-relaxed">
-              Experienced in professional vector workflows using industry-standard tools 
-              to ensure high-quality results every time.
-            </p>
-
-            {/* Trust Badge */}
-            <div className="mt-4 flex items-center gap-2 pt-2">
-              <div className="flex -space-x-2">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="h-6 w-6 rounded-full bg-(--accent)/20 border border-(--surface-1) flex items-center justify-center text-[10px] text-(--accent)">
-                    ✓
-                  </div>
-                ))}
+            <div className="mt-5 sm:mt-6 p-3 sm:p-4 rounded-xl bg-(--accent)/5 border border-(--accent)/10">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <FiZap className="text-(--accent) text-base sm:text-lg mt-0.5 flex-shrink-0" />
+                <p className="text-[11px] sm:text-xs text-(--muted) leading-relaxed">
+                  From simple logos to complex artwork, every project is carefully recreated with attention to detail to ensure the highest quality results for printing, branding, and production. <strong className="text-(--accent)">Suitable for commercial use.</strong>
+                </p>
               </div>
-              <span className="text-xs text-(--muted)">Trusted by 500+ clients</span>
+            </div>
+
+            <div className="mt-4 sm:mt-5 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between pt-3 sm:pt-4 border-t border-(--line)">
+              <div className="flex items-center gap-2">
+                <FiClock className="text-(--accent) text-sm" />
+                <span className="text-xs sm:text-sm text-(--muted)">Fast Turnaround Time</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FiThumbsUp className="text-(--accent) text-sm" />
+                <span className="text-xs sm:text-sm text-(--muted)">Suitable for Commercial Use</span>
+              </div>
             </div>
           </div>
         </article>
 
+      </div>
+
+      {/* Mobile CTA */}
+      <div className="mt-8 sm:mt-10 text-center md:hidden">
+        <div className="inline-flex items-center gap-2 text-xs sm:text-sm text-(--muted) bg-(--surface-2) px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-(--line)">
+          <FiHeart className="text-(--accent) animate-pulse" />
+          <span>Ready to transform your images?</span>
+          <FiTrendingUp className="text-(--accent)" />
+        </div>
       </div>
     </section>
   );

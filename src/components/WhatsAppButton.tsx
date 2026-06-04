@@ -1,16 +1,168 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { FaWhatsapp, FaArrowRight } from "react-icons/fa";
+import { FiBell } from "react-icons/fi";
+import gsap from "gsap";
+
 export default function WhatsAppButton() {
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const pulseRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const [showTooltip, setShowTooltip] = useState(true);
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      // Main floating animation
+      gsap.to(buttonRef.current, {
+        y: -10,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+      });
+    }
+
+    if (pulseRef.current) {
+      // Pulse ring animation
+      gsap.to(pulseRef.current, {
+        scale: 1.5,
+        opacity: 0,
+        duration: 1.5,
+        repeat: -1,
+        ease: "power2.out",
+      });
+    }
+
+    if (tooltipRef.current && showTooltip) {
+      // Tooltip bounce animation
+      gsap.fromTo(tooltipRef.current,
+        {
+          x: 20,
+          opacity: 0,
+          scale: 0.8,
+        },
+        {
+          x: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          delay: 0.5,
+          ease: "back.out(0.6)",
+        }
+      );
+
+      // Auto hide tooltip after 8 seconds
+      const timer = setTimeout(() => {
+        if (tooltipRef.current) {
+          gsap.to(tooltipRef.current, {
+            x: 20,
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.4,
+            ease: "power2.in",
+            onComplete: () => setShowTooltip(false),
+          });
+        }
+      }, 8000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showTooltip]);
+
+  const handleHover = () => {
+    if (buttonRef.current) {
+      gsap.to(buttonRef.current, {
+        scale: 1.15,
+        rotate: 10,
+        duration: 0.3,
+        ease: "back.out(0.5)",
+      });
+    }
+  };
+
+  const handleLeave = () => {
+    if (buttonRef.current) {
+      gsap.to(buttonRef.current, {
+        scale: 1,
+        rotate: 0,
+        duration: 0.3,
+        ease: "back.in(0.5)",
+      });
+    }
+  };
+
+  const handleClick = () => {
+    // Optional: Track click event
+    console.log("WhatsApp button clicked");
+  };
+
   return (
-    <a
-      href="https://wa.me/15550000000"
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/20 transition hover:-translate-y-1"
-    >
-      <svg viewBox="0 0 24 24" className="h-7 w-7" fill="currentColor" aria-hidden="true">
-        <path d="M17.5 14.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.8.2-.2.3-.9 1-.9 1.1-.2.1-.3.2-.7.1-2.1-1-3.5-2.9-3.6-3.1-.2-.3 0-.4.1-.6l.5-.5c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.8-2-1-2.7c-.3-.6-.5-.5-.8-.5h-.7c-.2 0-.5.1-.8.4-.3.3-1 1-.9 2.4 0 1.4 1 2.8 1.2 3 .1.2 2.1 3.4 5.2 4.6.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.8-.7 2.1-1.4.2-.7.2-1.2.2-1.3 0-.1-.2-.2-.4-.3z" />
-        <path d="M12.1 2A9.9 9.9 0 003.5 16.8L2 22l5.3-1.4A10 10 0 1012.1 2zm0 18.1c-1.6 0-3.2-.5-4.6-1.3l-.3-.2-3.1.8.8-3-.2-.3a8 8 0 1114.5-4.6 8.1 8.1 0 01-8.1 8.6z" />
-      </svg>
-    </a>
+    <div className="fixed bottom-5 right-5 z-50">
+      {/* Pulse ring effect */}
+      <div
+        ref={pulseRef}
+        className="absolute inset-0 rounded-full bg-[#25D366] opacity-60"
+        style={{ width: '56px', height: '56px' }}
+      />
+
+      {/* Animated tooltip / notification */}
+      {showTooltip && (
+        <div
+          ref={tooltipRef}
+          className="absolute bottom-16 right-0 mb-2 flex items-center gap-2 rounded-full bg-(--surface-1) px-4 py-2.5 shadow-xl border border-(--accent)/20 animate-in slide-in-from-right"
+        >
+          <div className="relative">
+            <FiBell className="text-(--accent) text-sm animate-pulse" />
+            <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-red-500 animate-ping" />
+          </div>
+          <span className="text-xs sm:text-sm font-medium text-(--heading) whitespace-nowrap">
+            Need vector help? 💬
+          </span>
+          <FaArrowRight className="text-(--accent) text-xs animate-bounce ml-1" />
+          
+          {/* Close tooltip button */}
+          <button
+            onClick={() => {
+              if (tooltipRef.current) {
+                gsap.to(tooltipRef.current, {
+                  x: 20,
+                  opacity: 0,
+                  scale: 0.8,
+                  duration: 0.3,
+                  onComplete: () => setShowTooltip(false),
+                });
+              }
+            }}
+            className="ml-2 text-(--muted) hover:text-(--heading) transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      {/* Main WhatsApp Button */}
+      <a
+        ref={buttonRef}
+        href="https://wa.me/message/PMGOOOEGCEL2N1"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat on WhatsApp"
+        onMouseEnter={handleHover}
+        onMouseLeave={handleLeave}
+        onClick={handleClick}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white shadow-2xl shadow-black/30 transition-all duration-300 hover:shadow-xl group"
+      >
+        <FaWhatsapp className="h-7 w-7" />
+        
+        {/* Small indicator dot */}
+        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-green-400 ring-2 ring-white animate-pulse" />
+      </a>
+
+      {/* Ripple effect on hover */}
+      <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ripple" />
+      </div>
+    </div>
   );
 }

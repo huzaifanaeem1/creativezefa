@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { faqs } from "@/data/site-data";
 import { FiChevronDown, FiHelpCircle, FiMail, FiMessageCircle } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -153,11 +154,16 @@ export default function FaqSection() {
               </div>
               
               {/* CTA Button */}
-              <button className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--accent) text-white text-sm font-semibold overflow-hidden transition-all hover:shadow-lg hover:scale-105">
-                <FiMail className="relative z-10 text-sm" />
-                <span className="relative z-10">Contact Me</span>
-                <div className="absolute inset-0 bg-linear-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
-              </button>
+              <a
+  href="https://wa.me/message/PMGOOOEGCEL2N1"
+  target="_blank"
+  rel="noreferrer"
+  className="group relative inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-(--accent) text-white text-sm font-semibold overflow-hidden transition-all hover:shadow-lg hover:scale-105 animate-pulse hover:animate-none"
+>
+  <FaWhatsapp className="relative z-10 text-sm" />
+  <span className="relative z-10">Contact Me</span>
+  <div className="absolute inset-0 bg-linear-to-r from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-500" />
+</a>
             </div>
           </div>
         </div>
