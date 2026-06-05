@@ -345,7 +345,7 @@ export default function PortfolioSection() {
                 sizes="100vw"
                 quality={80}
                 className="h-auto w-full max-h-[50vh] sm:max-h-[70vh] object-contain"
-                priority
+                loading="lazy"
               />
               
               {/* IMAGE COUNTER */}
