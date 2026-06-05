@@ -11,47 +11,43 @@ export default function ContactSection() {
   const [message, setMessage] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("loading");
-    setMessage("");
+  event.preventDefault();
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
+  setStatus("loading");
+  setMessage("");
 
-    const email = String(formData.get("email") ?? "").trim();
-    const file = formData.get("design");
+  const form = event.currentTarget;
+  const formData = new FormData(form);
 
-    if (!email.includes("@")) {
-      setStatus("error");
-      setMessage("Please provide a valid email address.");
-      return;
-    }
+  const email = String(formData.get("email") ?? "").trim();
 
-    if (!(file instanceof File) || file.size === 0) {
-      setStatus("error");
-      setMessage("Please upload a design file before submitting.");
-      return;
-    }
-
-    try {
-      // ✅ EmailJS send
-      await emailjs.sendForm(
-        "YOUR_SERVICE_ID",   // 🔥 replace
-        "YOUR_TEMPLATE_ID",  // 🔥 replace
-        form,
-        "YOUR_PUBLIC_KEY"    // 🔥 replace
-      );
-
-      setStatus("success");
-      setMessage("✅ Quote request sent successfully!");
-      form.reset();
-
-    } catch {
-      setStatus("error");
-      setMessage("❌ Failed to send. Try again.");
-    }
+  if (!email.includes("@")) {
+    setStatus("error");
+    setMessage("Please provide a valid email address.");
+    return;
   }
 
+  try {
+    await emailjs.sendForm(
+      "service_vcjdk8p",
+      "template_b5sronn",
+      form,
+      "MJcHThP6GLgCLnrdj"
+    );
+
+    setStatus("success");
+    setMessage("✅ Quote request sent successfully!");
+
+    form.reset();
+  } catch (error: any) {
+  console.log("FULL ERROR:", error);
+  console.log("STATUS:", error?.status);
+  console.log("TEXT:", error?.text);
+
+  setStatus("error");
+  setMessage(`❌ ${error?.text || "Failed to send email"}`);
+}
+}
   return (
     <section id="contact" className="section-muted border-y border-(--line)">
       <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
@@ -111,18 +107,12 @@ export default function ContactSection() {
             />
           </div>
 
-          <div>
-            <label htmlFor="design" className="mb-1 block text-sm font-medium text-(--heading)">
-              Design Upload
-            </label>
-            <input
-              id="design"
-              name="design"
-              type="file"
-              required
-              className="w-full rounded-xl border border-(--line) bg-(--surface-2) px-4 py-2.5 text-sm"
-            />
-          </div>
+          <input
+  type="hidden"
+  name="time"
+  value={new Date().toLocaleString()}
+/>
+
 
           <div>
             <label htmlFor="description" className="mb-1 block text-sm font-medium text-(--heading)">
