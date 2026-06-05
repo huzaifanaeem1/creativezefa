@@ -20,9 +20,9 @@ export default function Home() {
         <HeroSection />
         <ClientLogos />
         <AboutSection />
-        {/* <VideoSection/> */}
+        <VideoSection/>
         <ServicesSection />
-        {/* <PortfolioSection /> */}
+        <PortfolioSection />
         <PricingSection />
         <TestimonialsSection />
         <EtsyShop/>
