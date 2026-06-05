@@ -10,6 +10,7 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import EtsyShop from "@/components/sections/EtsyShop";
 import VideoSection from "@/components/sections/VideoSection";
 import Footer from "@/components/sections/Footer";
+import FaqSection from "@/components/sections/FaqSection";
 
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
         <PortfolioSection />
         {/* <PricingSection /> */}
         <TestimonialsSection />
+        <FaqSection />
         <EtsyShop/>
         <ContactSection />
       </main>
