@@ -12,7 +12,8 @@
 // import EtsyShop from "@/components/sections/EtsyShop";
 // import VideoSection from "@/components/sections/VideoSection";
 
-import Navbar from "@/components/ThemeToggle";
+import Navbar from "@/components/sections/Navbar";
+
 
 // export default function Home() {
 //   return (
