@@ -12,6 +12,8 @@
 // import EtsyShop from "@/components/sections/EtsyShop";
 // import VideoSection from "@/components/sections/VideoSection";
 
+import Navbar from "@/components/ThemeToggle";
+
 // export default function Home() {
 //   return (
 //     <>
@@ -35,5 +37,9 @@
 // }
 
 export default function Home() {
-  return <h1>Test</h1>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
