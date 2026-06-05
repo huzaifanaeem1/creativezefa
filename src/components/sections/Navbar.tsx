@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { useState } from "react";
 import { navLinks } from "@/data/site-data";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
