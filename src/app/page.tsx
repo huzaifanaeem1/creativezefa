@@ -16,7 +16,6 @@ import FaqSection from "@/components/sections/FaqSection";
 export default function Home() {
   return (
     <>
-      <Navbar />
       <main>
         <HeroSection />
         <ClientLogos />
@@ -30,7 +29,6 @@ export default function Home() {
         <EtsyShop/>
         <ContactSection />
       </main>
-      <Footer />
       <WhatsAppButton />
     </>
   );

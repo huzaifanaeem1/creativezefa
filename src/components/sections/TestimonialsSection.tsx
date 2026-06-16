@@ -12,7 +12,8 @@ import {
   FiStar,
   FiMessageSquare,
   FiTrendingUp,
-  FiThumbsUp
+  FiThumbsUp,
+  FiExternalLink
 } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,6 +21,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export default function TestimonialsSection() {
   const sectionRef = useRef(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const buttonRef = useRef<HTMLAnchorElement | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -60,6 +62,30 @@ export default function TestimonialsSection() {
       }
     });
 
+    // Button animation
+    if (buttonRef.current) {
+      gsap.fromTo(buttonRef.current,
+        {
+          opacity: 0,
+          y: 30,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          delay: 0.4,
+          ease: "back.out(0.6)",
+          scrollTrigger: {
+            trigger: buttonRef.current,
+            start: "top bottom-=50",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       window.removeEventListener('resize', checkMobile);
@@ -90,6 +116,24 @@ export default function TestimonialsSection() {
       duration: 0.3,
       ease: "power2.in",
       boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    });
+  };
+
+  const handleButtonHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    gsap.to(e.currentTarget, {
+      scale: 1.05,
+      boxShadow: "0 20px 40px -12px rgba(0,0,0,0.3)",
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleButtonLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    gsap.to(e.currentTarget, {
+      scale: 1,
+      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+      duration: 0.3,
+      ease: "power2.in",
     });
   };
 
@@ -288,6 +332,7 @@ export default function TestimonialsSection() {
           </div>
         )}
 
+        {/* Stats Grid */}
         <div className="mt-12 sm:mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
           <div className="text-center p-4 rounded-xl bg-(--surface-2)/50 border border-(--line) group hover:border-(--accent)/30 transition-all">
             <FiUsers className="text-(--accent) text-xl sm:text-2xl mx-auto mb-2 group-hover:scale-110 transition-transform" />
@@ -309,6 +354,26 @@ export default function TestimonialsSection() {
             <div className="font-display font-bold text-lg sm:text-xl text-(--heading)">100%</div>
             <div className="text-[10px] sm:text-xs text-(--muted)">Real Reviews</div>
           </div>
+        </div>
+
+        {/* GOOGLE REVIEW BUTTON - ADDED HERE */}
+        <div className="mt-10 sm:mt-14 flex justify-center">
+          <a
+            ref={buttonRef}
+            href="https://g.page/r/CZxOCwcMq1yWEBM/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={handleButtonHover}
+            onMouseLeave={handleButtonLeave}
+            className="group inline-flex items-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-[#0b461b] to-[#34A853] text-white font-semibold text-sm sm:text-base rounded-full shadow-lg shadow-[#4285F4]/25 hover:shadow-[#4285F4]/40 transition-all duration-300"
+          >
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.006 2.003c-5.517 0-9.997 4.48-9.997 9.997 0 5.518 4.48 9.998 9.997 9.998 5.518 0 9.998-4.48 9.998-9.998 0-5.517-4.48-9.997-9.998-9.997zM12 18.48c-3.576 0-6.48-2.904-6.48-6.48S8.424 5.52 12 5.52c1.728 0 3.264 0.672 4.416 1.728l-1.824 1.824c-0.672-0.672-1.536-1.056-2.592-1.056-2.112 0-3.84 1.728-3.84 3.84s1.728 3.84 3.84 3.84c1.92 0 3.264-1.248 3.6-2.4h-3.6v-2.4h6.24c0.096 0.48 0.144 0.96 0.144 1.536 0 3.456-2.4 6.24-6.384 6.24z"/>
+            </svg>
+            <span>Leave a Review on Google</span>
+            <FiExternalLink className="text-base sm:text-lg group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+            <span className="absolute -inset-1 rounded-full bg-[#4285F4]/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></span>
+          </a>
         </div>
 
       </div>

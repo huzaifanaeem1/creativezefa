@@ -12,16 +12,19 @@ import {
   FiThumbsUp,
   FiBriefcase,
   FiZap,
-  FiUsers
+  FiUsers,
+  FiArrowRight
 } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 export default function AboutSection() {
   const sectionRef = useRef(null);
   const leftCardRef = useRef(null);
   const rightCardRef = useRef(null);
   const listItemsRef = useRef<(HTMLLIElement | null)[]>([]);
+  const buttonRef = useRef<HTMLAnchorElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -105,6 +108,30 @@ export default function AboutSection() {
       }
     });
 
+    // Button animation
+    if (buttonRef.current) {
+      gsap.fromTo(buttonRef.current,
+        {
+          opacity: 0,
+          y: 20,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          delay: 0.5,
+          ease: "back.out(0.6)",
+          scrollTrigger: {
+            trigger: buttonRef.current,
+            start: "top bottom-=50",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       window.removeEventListener('resize', checkMobile);
@@ -126,6 +153,26 @@ export default function AboutSection() {
     gsap.to(card, {
       y: 0,
       boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+      duration: 0.3,
+      ease: "power2.in",
+    });
+  };
+
+  const handleButtonHover = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.currentTarget;
+    gsap.to(target, {
+      scale: 1.05,
+      boxShadow: "0 20px 40px -12px rgba(0,0,0,0.3)",
+      duration: 0.3,
+      ease: "power2.out",
+    });
+  };
+
+  const handleButtonLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const target = e.currentTarget;
+    gsap.to(target, {
+      scale: 1,
+      boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
       duration: 0.3,
       ease: "power2.in",
     });
@@ -198,7 +245,7 @@ export default function AboutSection() {
                   ref={(el) => { listItemsRef.current[index] = el; }}
                   className="flex items-start gap-2.5 sm:gap-3 group/item hover:translate-x-1 transition-transform duration-200"
                 >
-                  <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0 flex-shrink-0" />
+                  <FiCheckCircle className="mt-0.5 text-base sm:text-lg text-(--accent) shrink-0" />
                   <div className="flex-1">
                     <span className="text-(--muted) leading-relaxed">{point}</span>
                   </div>
@@ -330,6 +377,21 @@ export default function AboutSection() {
           </div>
         </article>
 
+      </div>
+
+      {/* VIEW FULL ABOUT BUTTON - ADDED HERE */}
+      <div className="mt-10 sm:mt-12 flex justify-center">
+        <Link
+          ref={buttonRef}
+          href="/about-us"
+          onMouseEnter={handleButtonHover}
+          onMouseLeave={handleButtonLeave}
+          className="group inline-flex items-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-(--accent) to-(--accent)/80 text-white font-semibold text-sm sm:text-base rounded-full shadow-lg shadow-(--accent)/25 hover:shadow-(--accent)/40 transition-all duration-300"
+        >
+          <span>View Full About Page</span>
+          <FiArrowRight className="text-base sm:text-lg group-hover:translate-x-1.5 transition-transform duration-300" />
+          <span className="absolute -inset-1 rounded-full bg-(--accent)/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></span>
+        </Link>
       </div>
 
       {/* Mobile CTA */}

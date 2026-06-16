@@ -72,7 +72,6 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      id="home"
       className="relative overflow-hidden border-b border-(--line) pt-4 sm:pt-6 md:pt-8 lg:pt-10"
     >
       {/* Animated Background Elements */}

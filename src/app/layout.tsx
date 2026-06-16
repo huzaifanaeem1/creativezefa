@@ -3,7 +3,7 @@ import { Inter, Outfit } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/sections/Navbar";
-import TopNavbar from "@/components/sections/Navbar";
+import Footer from "@/components/sections/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -128,8 +128,12 @@ export default function RootLayout({
         <link rel="canonical" href="https://creativezefa.com" />
       </head>
       <body className="min-h-full bg-background text-foreground">
+
+  <Navbar />
         
         {children}
+
+          <Footer />
 
         
         {/* Schema markup for better SEO */}
@@ -145,11 +149,11 @@ export default function RootLayout({
               "description": "Professional vector tracing, raster-to-vector conversion, and print-ready artwork services.",
               "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "Sialkot",
+                "addressLocality": "Karachi",
                 "addressCountry": "PK"
               },
               "priceRange": "$5 - $50",
-              "telephone": "+92XXXXXXXXX",
+              "telephone": "+923283389837",
               "openingHours": "Mo-Su 00:00-23:59",
               "sameAs": [
                 "https://www.instagram.com/creativezefa/",
