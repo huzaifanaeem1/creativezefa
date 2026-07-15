@@ -63,12 +63,12 @@ export default function ContactSection() {
    <p>
   Email:{" "}
   <a
-    href="https://mail.google.com/mail/?view=cm&fs=1&to=creativezefa2@gmail.com"
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=hello@creativezefa.art"
     target="_blank"
     rel="noopener noreferrer"
     className="text-blue-500 hover:underline"
   >
-    creativezefa2@gmail.com
+    hello@creativezefa.art
   </a>
 </p>
 

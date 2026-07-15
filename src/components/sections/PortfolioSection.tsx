@@ -289,6 +289,17 @@ export default function PortfolioSection() {
           description="Premium logo designs, vector packs & bundles."
         />
 
+               {/* ─── NEW: Showcase Image ────────────────────────────────────────────── */}
+        <div className="mb-10 overflow-hidden rounded-3xl border border-(--line) sm:mb-12">
+          <Image
+            src="/vector-collection.webp"
+            alt="CreativeZefa Vector Collection"
+            width={3840}
+            height={6000}
+            priority
+            className="h-auto w-full object-cover"
+          />
+        </div>
         {/* ── Filter buttons ──────────────────────────────────────────────── */}
         <div className="mb-6 flex flex-wrap gap-2 sm:mb-8 sm:gap-3">
           {categories.map((cat) => {
